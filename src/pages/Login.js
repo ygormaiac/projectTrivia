@@ -11,6 +11,7 @@ class Login extends React.Component {
       name: '',
       email: '',
       disabled: true,
+      token: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.validadeLogin = this.validadeLogin.bind(this);
@@ -34,11 +35,13 @@ class Login extends React.Component {
     });
   }
 
-  loginIn() {
+  async loginIn() {
     const { history, dispatchLogin } = this.props;
-
+    const data = await (await fetch('https://opentdb.com/api_token.php?command=request'))
+      .json();
     dispatchLogin(this.state);
-    history.push('/');
+    localStorage.setItem('token', JSON.stringify(data.token));
+    history.push('/play');
   }
 
   render() {
