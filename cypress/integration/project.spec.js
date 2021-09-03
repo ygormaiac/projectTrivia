@@ -41,7 +41,7 @@ const BUTTON_PLAY_AGAIN_SELECTOR = '[data-testid="btn-play-again"]';
 
 // login
 
-describe.only('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo', () => {
+describe('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });
@@ -79,7 +79,7 @@ describe.only('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga 
   });
 });
 
-describe.only('2 - [TELA DE LOGIN] Crie o botão de iniciar o jogo', () => {
+describe('2 - [TELA DE LOGIN] Crie o botão de iniciar o jogo', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -94,7 +94,7 @@ describe.only('2 - [TELA DE LOGIN] Crie o botão de iniciar o jogo', () => {
   });
 });
 
-describe.only('3 - [TELA DE LOGIN] Crie um botão na tela inicial que leve para a tela de configurações', () => {
+describe('3 - [TELA DE LOGIN] Crie um botão na tela inicial que leve para a tela de configurações', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });
