@@ -40,9 +40,9 @@ export function fetchGameAPI() {
     dispatch(loadingGame());
     try {
       const data = await (await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`)).json();
-      return dispatch(successGame(data));
+      return dispatch(successGame(data.results));
     } catch (error) {
-      return dispatch(errorGame(error))
+      return dispatch(errorGame(error));
     }
-  }
+  };
 }

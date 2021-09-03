@@ -1,41 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import md5 from 'crypto-js/md5';
+import PropTypes from 'prop-types';
+import Header from '../components/Header';
+import { fetchGameAPI } from '../redux/actions';
 
 class Play extends Component {
-  constructor() {
-    super();
-
-    this.emailUser = this.emailUser.bind(this);
-  }
-
-  emailUser() {
-    const { emailPlayer } = this.props;
-    return md5(emailPlayer).toString();
+  componentDidMount() {
+    const { resultAPI } = this.props;
+    resultAPI();
   }
 
   render() {
-    const { namePlayer } = this.props;
-
     return (
       <div>
-        <header data-testid="header-player-name">
-          <img 
-          data-testid="header-profile-picture" 
-          alt="imageUser" 
-          src={`https://www.gravatar.com/avatar/${ this.emailUser() }`}
-          />
-          <span>{ namePlayer }</span>
-          <span data-testid="header-score">0</span>
-        </header>
+        <Header />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  namePlayer: state.userReducer.name,
-  emailPlayer: state.userReducer.email,
-})
+Play.propTypes = {
+  resultAPI: PropTypes.func.isRequired,
+};
 
-export default connect(mapStateToProps)(Play);
+const mapStateToProps = (state) => ({
+  results: state.playerReducer.results,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  resultAPI: () => dispatch(fetchGameAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Play);
