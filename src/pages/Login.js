@@ -12,9 +12,11 @@ class Login extends React.Component {
       email: '',
       disabled: true,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.validadeLogin = this.validadeLogin.bind(this);
     this.loginIn = this.loginIn.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange({ target }) {
@@ -34,11 +36,18 @@ class Login extends React.Component {
     });
   }
 
-  loginIn() {
-    const { history, dispatchLogin } = this.props;
-
+  async loginIn(path) {
+    const { dispatchLogin } = this.props;
+    const data = await (await fetch('https://opentdb.com/api_token.php?command=request'))
+      .json();
     dispatchLogin(this.state);
-    history.push('/');
+    localStorage.setItem('token', JSON.stringify(data.token));
+    this.handleClick(path);
+  }
+
+  handleClick(path) {
+    const { history } = this.props;
+    history.push(path);
   }
 
   render() {
@@ -64,10 +73,15 @@ class Login extends React.Component {
           />
         </label>
         <Button
-          teste="btn-play"
+          test="btn-play"
           name="Jogar"
           disabled={ disabled }
-          onClick={ this.loginIn }
+          onClick={ () => this.loginIn('/play') }
+        />
+        <Button
+          test="btn-settings"
+          name="Configurações"
+          onClick={ () => this.handleClick('/settings') }
         />
       </div>
     );
