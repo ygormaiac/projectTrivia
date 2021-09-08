@@ -11,6 +11,7 @@ class Card extends Component {
     };
 
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,20 @@ class Card extends Component {
     }
   }
 
+  handleClick() {
+    const { question: { correct_answer: correct } } = this.props;
+
+    document.querySelectorAll('.btn-answer').forEach((btn) => {
+      if (btn.innerText === correct) {
+        btn.classList.add('green');
+        btn.disabled = true;
+      } else {
+        btn.classList.add('red');
+        btn.disabled = true;
+      }
+    });
+  }
+
   render() {
     const { shuffleList } = this.state;
     const { question } = this.props;
@@ -56,6 +71,7 @@ class Card extends Component {
               key={ i }
               name={ answer.answer }
               onClick={ this.handleClick }
+              className="btn-answer"
             />
           ))}
         </div>

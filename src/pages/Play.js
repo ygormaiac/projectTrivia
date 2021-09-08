@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import { fetchGameAPI } from '../redux/actions';
+import './Play.css';
 
 class Play extends Component {
   constructor(props) {
@@ -24,8 +25,6 @@ class Play extends Component {
     const { indexQuestion } = this.state;
 
     if (loading === true) return <h2>Loading...</h2>;
-    console.log(results);
-    console.log(results[indexQuestion]);
     return (
       <div>
         <Header />
