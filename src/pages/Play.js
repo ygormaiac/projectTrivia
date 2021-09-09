@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import Button from '../components/Button';
 import { fetchGameAPI } from '../redux/actions';
 import './Play.css';
 
@@ -19,6 +20,8 @@ class Play extends Component {
     this.timeOut = this.timeOut.bind(this);
     this.scoreSum = this.scoreSum.bind(this);
     this.sum = this.sum.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.addIndex = this.addIndex.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +33,7 @@ class Play extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.countdown === 0) {
       this.timeOut();
+      document.querySelector('.btn-next').classList.remove('hidden');
     }
   }
 
@@ -46,6 +50,7 @@ class Play extends Component {
 
   countdown() {
     const ONE_SECOND = 1000;
+    this.setState({ countdown: 30 });
 
     this.cronometerInterval = setInterval(() => {
       this.setState((prevState) => ({ countdown: prevState.countdown - 1 }));
@@ -81,6 +86,24 @@ class Play extends Component {
     return magicTen + (countdown * multiplier);
   }
 
+  handleClick() {
+    const { indexQuestion } = this.state;
+    const { history } = this.props;
+    const magicFour = 4;
+
+    if (indexQuestion === magicFour) {
+      history.push('/feedback');
+    }
+    clearInterval(this.cronometerInterval);
+    this.countdown();
+    this.addIndex();
+  }
+
+  addIndex() {
+    this.setState((prevState) => ({
+      indexQuestion: prevState.indexQuestion + 1 }));
+  }
+
   render() {
     const { results, loading } = this.props;
     const { indexQuestion, countdown } = this.state;
@@ -91,6 +114,12 @@ class Play extends Component {
         <Header />
         <Card question={ results[indexQuestion] } score={ this.scoreSum } />
         <span>{countdown}</span>
+        <Button
+          name="Próxima"
+          test="btn-next"
+          onClick={ this.handleClick }
+          className="btn-next hidden"
+        />
       </div>
     );
   }
@@ -100,6 +129,7 @@ Play.propTypes = {
   resultAPI: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
+  history: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 const mapStateToProps = (state) => ({
