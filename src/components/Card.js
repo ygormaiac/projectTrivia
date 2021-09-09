@@ -12,10 +12,29 @@ class Card extends Component {
 
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setShuffleState = this.setShuffleState.bind(this);
   }
 
   componentDidMount() {
-    this.shuffleAnswers();
+    this.setShuffleState();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { question } = this.props;
+
+    if (question !== prevProps.question) {
+      document.querySelectorAll('.btn-answer').forEach((btn) => {
+        btn.disabled = false;
+        btn.className = 'btn-answer';
+      });
+      this.setShuffleState();
+    }
+  }
+
+  setShuffleState() {
+    this.setState({
+      shuffleList: this.shuffleAnswers(),
+    });
   }
 
   shuffleAnswers() {
@@ -38,7 +57,8 @@ class Card extends Component {
         const j = Math.floor(Math.random() * (i + 1));
         [allAnswers[i], allAnswers[j]] = [allAnswers[j], allAnswers[i]];
       }
-      this.setState({ shuffleList: allAnswers });
+      // this.setState({ shuffleList: allAnswers });
+      return allAnswers;
     }
   }
 
@@ -48,6 +68,7 @@ class Card extends Component {
 
     score(target, question.difficulty);
 
+    document.querySelector('.btn-next').classList.remove('hidden');
     document.querySelectorAll('.btn-answer').forEach((btn) => {
       if (btn.innerText === correct) {
         btn.classList.add('green');
