@@ -17,6 +17,8 @@ class Play extends Component {
 
     this.countdown = this.countdown.bind(this);
     this.timeOut = this.timeOut.bind(this);
+    this.scoreSum = this.scoreSum.bind(this);
+    this.sum = this.sum.bind(this);
   }
 
   componentDidMount() {
@@ -26,8 +28,7 @@ class Play extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const MIN_SECONDS = 0;
-    if (prevState.countdown === MIN_SECONDS) {
+    if (prevState.countdown === 0) {
       this.timeOut();
     }
   }
@@ -38,8 +39,8 @@ class Play extends Component {
 
   timeOut() {
     document.querySelectorAll('.btn-answer')
-      .forEach((btn) => (btn.disabled === true));
-    this.setState({ countdown: 'Seu tempo acabou! :(' });
+      .forEach((btn) => { btn.disabled = true; });
+    this.setState({ countdown: 'Yout time is over! :(' });
     clearInterval(this.cronometerInterval);
   }
 
@@ -51,6 +52,35 @@ class Play extends Component {
     }, ONE_SECOND);
   }
 
+  scoreSum(target, difficulty) {
+    const { indexQuestion } = this.state;
+    const { results } = this.props;
+    const correct = results[indexQuestion].correct_answer;
+    const state = JSON.parse(localStorage.getItem('state'));
+    clearInterval(this.cronometerInterval);
+
+    if (target.innerText === correct) {
+      const score = this.sum(difficulty);
+      state.player.score += score;
+      state.player.assertions += 1;
+    }
+
+    localStorage.setItem('state', JSON.stringify(state));
+  }
+
+  sum(difficulty) {
+    const { countdown } = this.state;
+    let multiplier = 0;
+    const magicThree = 3;
+
+    if (difficulty === 'hard') multiplier = magicThree;
+    if (difficulty === 'mediun') multiplier = 2;
+    if (difficulty === 'easy') multiplier = 1;
+
+    const magicTen = 10;
+    return magicTen + (countdown * multiplier);
+  }
+
   render() {
     const { results, loading } = this.props;
     const { indexQuestion, countdown } = this.state;
@@ -59,7 +89,7 @@ class Play extends Component {
     return (
       <div>
         <Header />
-        <Card question={ results[indexQuestion] } />
+        <Card question={ results[indexQuestion] } score={ this.scoreSum } />
         <span>{countdown}</span>
       </div>
     );
