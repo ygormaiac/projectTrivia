@@ -42,8 +42,11 @@ class Card extends Component {
     }
   }
 
-  handleClick() {
-    const { question: { correct_answer: correct } } = this.props;
+  handleClick({ target }) {
+    const { question, score } = this.props;
+    const { correct_answer: correct } = question;
+
+    score(target, question.difficulty);
 
     document.querySelectorAll('.btn-answer').forEach((btn) => {
       if (btn.innerText === correct) {
@@ -84,6 +87,7 @@ class Card extends Component {
 
 Card.propTypes = {
   question: PropTypes.objectOf(PropTypes.any).isRequired,
+  score: PropTypes.func.isRequired,
 };
 
 export default Card;

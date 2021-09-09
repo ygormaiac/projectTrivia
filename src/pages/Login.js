@@ -30,7 +30,6 @@ class Login extends React.Component {
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
     const { email, name } = this.state;
     const disabled = !(regex.test(email) && name.length >= 1);
-    console.log(regex.test(email), email);
     this.setState({
       disabled,
     });
@@ -47,7 +46,17 @@ class Login extends React.Component {
 
   handleClick(path) {
     const { history } = this.props;
+    const { email, name } = this.state;
     history.push(path);
+    const state = {
+      player: {
+        name,
+        assertions: 0,
+        score: 0,
+        gravatarEmail: email,
+      },
+    };
+    localStorage.setItem('state', JSON.stringify(state));
   }
 
   render() {
