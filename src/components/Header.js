@@ -7,7 +7,20 @@ class Header extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      total: 0,
+    };
     this.emailUser = this.emailUser.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.getScore();
+  }
+
+  getScore() {
+    const getScore = JSON.parse(localStorage.getItem('state'));
+    const { player: { score } } = getScore;
+    this.setState({ total: score });
   }
 
   emailUser() {
@@ -17,6 +30,7 @@ class Header extends React.Component {
 
   render() {
     const { namePlayer } = this.props;
+    const { total } = this.state;
     return (
       <header data-testid="header-player-name">
         <img
@@ -25,7 +39,7 @@ class Header extends React.Component {
           src={ `https://www.gravatar.com/avatar/ ${this.emailUser()}` }
         />
         <span>{namePlayer}</span>
-        <span data-testid="header-score">0</span>
+        <span data-testid="header-score">{total}</span>
       </header>
     );
   }
