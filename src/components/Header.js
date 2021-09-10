@@ -19,7 +19,7 @@ class Header extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { index } = this.props;
     if (prevProps.index !== index) {
       this.getScore();
@@ -58,6 +58,7 @@ class Header extends React.Component {
 Header.propTypes = {
   emailPlayer: PropTypes.string.isRequired,
   namePlayer: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({

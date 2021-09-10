@@ -48,11 +48,15 @@ class Feedback extends React.Component {
       <div>
         <Header />
         <h1 data-testid="feedback-text">{message}</h1>
-        <p data-testid="feedback-total-question">
-          {rightAnswers === 0 ? 'Você não acertou nenhuma pergunta'
-            : `Acertou ${rightAnswers} pergunta(s)`}
+        <p>
+          {'Você acertou '}
+          <span data-testid="feedback-total-question">{rightAnswers}</span>
+          {' pergunta(s)'}
         </p>
-        <p data-testid="feedback-total-score">{`Pontuação total: ${total}`}</p>
+        <p>
+          Pontuação total:
+          <span data-testid="feedback-total-score">{total}</span>
+        </p>
         <Button
           test="btn-play-again"
           name="Jogar novamente"
