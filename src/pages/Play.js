@@ -90,6 +90,7 @@ class Play extends Component {
     const { indexQuestion } = this.state;
     const { history } = this.props;
     const magicFour = 4;
+    document.querySelector('.btn-next').classList.add('hidden');
 
     if (indexQuestion === magicFour) {
       history.push('/feedback');
