@@ -87,8 +87,13 @@ class Card extends Component {
     if (question) {
       return (
         <div>
-          <span data-testid="question-category">{question.category}</span>
-          <p data-testid="question-text">{question.question}</p>
+          <span
+            data-testid="question-category"
+            className="category"
+          >
+            {question.category}
+          </span>
+          <p data-testid="question-text" className="question">{question.question}</p>
           {shuffleList.map((answer, i) => (
             <Button
               test={ answer.testId }

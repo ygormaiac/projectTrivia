@@ -44,7 +44,7 @@ class Play extends Component {
   timeOut() {
     document.querySelectorAll('.btn-answer')
       .forEach((btn) => { btn.disabled = true; });
-    this.setState({ countdown: 'Yout time is over! :(' });
+    this.setState({ countdown: 'Your time is over! :(' });
     clearInterval(this.cronometerInterval);
   }
 
@@ -110,10 +110,10 @@ class Play extends Component {
 
     if (loading === true) return <h2>Loading...</h2>;
     return (
-      <div>
+      <div className="card-game">
         <Header />
         <Card question={ results[indexQuestion] } score={ this.scoreSum } />
-        <span>{countdown}</span>
+        <span className="countdown">{countdown}</span>
         <Button
           name="Próxima"
           test="btn-next"
