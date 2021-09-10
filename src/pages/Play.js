@@ -111,7 +111,7 @@ class Play extends Component {
     if (loading === true) return <h2>Loading...</h2>;
     return (
       <div className="card-game">
-        <Header />
+        <Header index={ indexQuestion } />
         <Card question={ results[indexQuestion] } score={ this.scoreSum } />
         <span className="countdown">{countdown}</span>
         <Button

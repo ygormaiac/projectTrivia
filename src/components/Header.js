@@ -13,8 +13,17 @@ class Header extends React.Component {
     this.emailUser = this.emailUser.bind(this);
   }
 
-  componentDidUpdate() {
-    this.getScore();
+  componentDidMount() {
+    if (localStorage.state) {
+      this.getScore();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { index } = this.props;
+    if (prevProps.index !== index) {
+      this.getScore();
+    }
   }
 
   getScore() {
