@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../components/Button';
 import { saveLoginInfo } from '../redux/actions';
+import img from './trivia.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -62,10 +63,11 @@ class Login extends React.Component {
   render() {
     const { disabled } = this.state;
     return (
-      <div>
+      <div className="input-login">
+        <img src={ img } alt="Trivia" className="img-trivia" />
         <label htmlFor="name">
-          Nome:
           <input
+            className="input-form-data"
             id="name"
             name="name"
             data-testid="input-player-name"
@@ -73,8 +75,8 @@ class Login extends React.Component {
           />
         </label>
         <label htmlFor="email">
-          Email:
           <input
+            className="input-form-data"
             id="email"
             name="email"
             data-testid="input-gravatar-email"
@@ -82,12 +84,14 @@ class Login extends React.Component {
           />
         </label>
         <Button
+          className="button-play"
           test="btn-play"
           name="Jogar"
           disabled={ disabled }
           onClick={ () => this.loginIn('/play') }
         />
         <Button
+          className="button-settings"
           test="btn-settings"
           name="Configurações"
           onClick={ () => this.handleClick('/settings') }
