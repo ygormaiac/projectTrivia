@@ -23,6 +23,12 @@ export const errorGame = (error) => ({
   error,
 });
 
+export const decodeHtml = (html) => {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+} 
+
 // export const fetchGameAPI = (dispatch) => {
 //   dispatch(loadingGame());
 //   fetch(`https://opentdb.com/api.php?amount=5&token=${token}`)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
+import { decodeHtml } from '../redux/actions';
 
 class Card extends Component {
   constructor(props) {
@@ -93,7 +94,7 @@ class Card extends Component {
           >
             {question.category}
           </span>
-          <p data-testid="question-text" className="question">{question.question}</p>
+          <p data-testid="question-text" className="question">{ decodeHtml(question.question) }</p>
           {shuffleList.map((answer, i) => (
             <Button
               test={ answer.testId }
