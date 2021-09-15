@@ -68,6 +68,7 @@ class Login extends React.Component {
         <label htmlFor="name">
           <input
             className="input-form-data"
+            placeholder="Nome"
             id="name"
             name="name"
             data-testid="input-player-name"
@@ -77,6 +78,7 @@ class Login extends React.Component {
         <label htmlFor="email">
           <input
             className="input-form-data"
+            placeholder="E-mail"
             id="email"
             name="email"
             data-testid="input-gravatar-email"

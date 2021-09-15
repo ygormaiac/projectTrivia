@@ -45,28 +45,32 @@ class Feedback extends React.Component {
     const { message, rightAnswers, total } = this.state;
 
     return (
-      <div>
+      <div className="div-feedback">
         <Header />
-        <h1 data-testid="feedback-text">{message}</h1>
-        <p>
+        <h1 data-testid="feedback-text" className="feedback">{message}</h1>
+        <p className="results">
           {'Você acertou '}
           <span data-testid="feedback-total-question">{rightAnswers}</span>
           {' pergunta(s)'}
         </p>
-        <p>
+        <p className="results">
           Pontuação total:
           <span data-testid="feedback-total-score">{total}</span>
         </p>
+        <section className="buttons">
         <Button
           test="btn-play-again"
+          className="button-feedback"
           name="Jogar novamente"
           onClick={ () => this.handleClick('/') }
         />
         <Button
           test="btn-ranking"
+          className="button-feedback"
           name="Ver Ranking"
           onClick={ () => this.handleClick('/ranking') }
         />
+        </section>
       </div>
     );
   }

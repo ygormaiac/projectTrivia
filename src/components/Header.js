@@ -46,7 +46,7 @@ class Header extends React.Component {
           className="gravatar-img"
           data-testid="header-profile-picture"
           alt="imageUser"
-          src={ `https://www.gravatar.com/avatar/ ${this.emailUser()}` }
+          src={ `https://www.gravatar.com/avatar/${this.emailUser()}` }
         />
         <span className="name-player">{namePlayer}</span>
         <span data-testid="header-score" className="total-score">{total}</span>

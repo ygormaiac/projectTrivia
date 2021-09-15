@@ -86,7 +86,7 @@ class Card extends Component {
 
     if (question) {
       return (
-        <div>
+        <div className="question-total">
           <span
             data-testid="question-category"
             className="category"

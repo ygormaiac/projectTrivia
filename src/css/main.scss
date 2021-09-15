@@ -7,10 +7,11 @@ $second-color: #20b2aa;
   margin-bottom: 50px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee&family=Changa:wght@500&family=Press+Start+2P&family=Quantico:ital@1&family=Roboto:wght@500&display=swap');
+
 @mixin header-play-game {
   color: $primary-color;
-  margin: 80px;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 }
 
@@ -74,7 +75,32 @@ body {
   background-image: url(../trivia-back.jpeg);
   background-position: center center;
   background-size: cover;
+  width: 100vw;
+  height: 100vh;
 }
+
+.loading {
+    animation: is-rotating 1s infinite;
+    border: 20px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: #3A5FCD;
+    height: 250px;
+    width: 250px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    margin-top: 250px;
+
+  }
+  
+  @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+  }
 
 .input-login {
   display: flex;
@@ -114,28 +140,52 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding-top: 20px;
+  margin-bottom: 50px;
+  border: 3px solid $primary-color;
+  border-style: dotted;
+  padding: 10px;
 }
 
 .gravatar-img {
-  margin: 80px;
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .name-player {
   @include header-play-game();
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 30px;
 }
 
 .total-score {
   @include header-play-game();
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 30px;
+}
+
+.question {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 10vh;
+  color: $primary-color;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.question-total {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 120px;
 }
 
 .card-game {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  vertical-align: middle;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+  // grid-template-rows: 50px;
+  // vertical-align: middle;
   width: 100vw;
   height: 100vh;
 }
@@ -149,35 +199,92 @@ body {
   margin: 10px;
   cursor: pointer;
   margin-bottom: 30px;
+  
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .category {
   color: $primary-color;
   display: flex;
-  align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-.question {
-  color: $primary-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  font-size: 25px;
   margin-bottom: 20px;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .btn-next {
+  display: flex;
   color: $primary-color;
   background-color: #3A5FCD;
-  @include buttons-login-2();
-  @include button-total();
+  font-weight: bold;
+  border-radius: 5px;
+  justify-content: space-evenly;
+  margin: 5px 5px;
+  max-width: 150px;
+  padding: 10px 40px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: 1px solid $primary-color;
+  margin: 0 auto;
+  margin-top: 60px;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .countdown {
   color: $primary-color;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   font-weight: bolder;
+  background-color: #3A5FCD;
+  border-radius: 50%;
+  max-width: 40px;
+  padding: 20px;
+  border: 2px solid $primary-color;
+  margin: 0 auto;
+}
+
+.feedback {
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.button-feedback {
+  @include button-total();
+  @include buttons-login-2();
+  background-color: #3A5FCD;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.results {
+  color: $primary-color;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-size: 20px;
+  letter-spacing: 7px;
+  font-family: 'Press Start 2P', cursive;
 }

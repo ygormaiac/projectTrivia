@@ -109,7 +109,7 @@ class Play extends Component {
     const { results, loading } = this.props;
     const { indexQuestion, countdown } = this.state;
 
-    if (loading === true) return <h2>Loading...</h2>;
+    if (loading === true) return <div className="loading"></div>;
     return (
       <div className="card-game">
         <Header index={ indexQuestion } />
